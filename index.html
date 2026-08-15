@@ -428,10 +428,6 @@
           <label>Total points required</label>
           <input type="text" id="totalReqDisplay" disabled style="font-family:'Space Mono',monospace;">
         </div>
-        <div class="field" style="max-width:220px;">
-          <label>Min points needed in Q2</label>
-          <input type="text" id="minReqDisplay" disabled style="font-family:'Space Mono',monospace;">
-        </div>
       </div>
 
       <div class="progress-wrap" id="progressWrap" style="display:none;">
@@ -762,7 +758,6 @@ function selectDealer(code){
     destSel.appendChild(opt);
   });
   document.getElementById('totalReqDisplay').value = '';
-  document.getElementById('minReqDisplay').value = '';
   document.getElementById('progressWrap').style.display = 'none';
   document.getElementById('balanceBox').style.display = 'none';
 
@@ -773,13 +768,12 @@ function selectDealer(code){
 document.getElementById('destSel').addEventListener('change', function(){
   const key = this.value;
   const boxTotal = document.getElementById('totalReqDisplay');
-  const boxMin = document.getElementById('minReqDisplay');
   const progWrap = document.getElementById('progressWrap');
   const balBox = document.getElementById('balanceBox');
   const balPhoto = document.getElementById('balancePhoto');
 
   if (!key || !currentDealer){
-    boxTotal.value = ''; boxMin.value = '';
+    boxTotal.value = '';
     progWrap.style.display = 'none';
     balBox.style.display = 'none';
     balPhoto.classList.remove('show');
@@ -793,7 +787,6 @@ document.getElementById('destSel').addEventListener('change', function(){
   const q2ValueLacs = d.q2v;
 
   boxTotal.value = fmtInt(dest.total) + ' pts';
-  boxMin.value = fmtInt(dest.minQ2) + ' pts';
 
   // Avg sale value per point in Q2 (fallback 21 if no Q2 points recorded yet)
   const avgPerPoint = q2Points > 0 ? (q2ValueLacs * 100000) / q2Points : 21;
